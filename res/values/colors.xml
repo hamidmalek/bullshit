@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="fragment_background">#F2F2F2</color>
+    <color name="black">#000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="app_background">#29AAE1</color>
+    <color name="light_red">#ba0305</color>
+    <color name="dark_red">#9d0c0f</color>
+    <color name="text_tab_selected">#5d5d5d</color>
+    <color name="text_tab_unselected">#838183</color>
+    <color name="action_bar_background"> #29ABE2</color>
+    <color name="tab_text_color"> #29ABE2</color>
+    <color name="tab_indicatora">#A0CFE2</color>
+    <color name="tab_indicator">#FAF</color>
+    <color name="tabs_background">#FFF</color>
+    <color name="border">#B7B7B7</color>
+
+</resources>

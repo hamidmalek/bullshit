@@ -2,23 +2,31 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2" >
+    android:background="#F2F2F2" xmlns:app="http://schemas.android.com/apk/res/com.malek.hamid">
 
     <!-- The main content view -->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        >
 
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="48dip"
-            android:background="@drawable/background_tabs" />
+            android:background="@color/tabs_background"
+            app:pstsDividerColor="@color/tabs_background"
+            app:pstsIndicatorColor="@color/tab_indicatora"
+            app:pstsIndicatorHeight="@dimen/indicator_height"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="false"
+            
+            app:pstsUnderlineHeight="0dp" />
 
         <android.support.v4.view.ViewPager
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/pager"
+            android:id="@+id/pager" 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tabs"

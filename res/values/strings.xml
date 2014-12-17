@@ -25,6 +25,8 @@
     <string name="fragment_log">تقویم</string>
     <string name="fragment_foods">لیست غذاها</string>
 
+    
+    <string name="today_advice"><u>توصیه های امروز</u></string>
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>

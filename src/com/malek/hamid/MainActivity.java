@@ -57,17 +57,8 @@ public class MainActivity extends FragmentActivity {
 
 		pager.setAdapter(adapter);
 
-		final int pageMargin = (int) TypedValue.applyDimension(
-				TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
-						.getDisplayMetrics());
-		pager.setPageMargin(pageMargin);
 
-		tabs.setUnderlineHeight(0);
-		tabs.setDividerColor(Color.WHITE);
-		tabs.setBackgroundColor(Color.WHITE);
-		tabs.setIndicatorColor(R.color.tab_indicator);
 		tabs.setTextColorResource(R.color.tab_text_color);
-//		changeColor(currentColor);
 		tabs.setViewPager(pager);
 	}
 
@@ -80,15 +71,15 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		switch (item.getItemId()) {
-
-		case R.id.action_contact:
-			QuickContactFragment dialog = new QuickContactFragment();
-			dialog.show(getSupportFragmentManager(), "QuickContactFragment");
-			return true;
-
-		}
-
+//		switch (item.getItemId()) {
+//
+//		case R.id.action_contact:
+//			addFoodFragment dialog = new addFoodFragment();
+//			dialog.show(getSupportFragmentManager(), "QuickContactFragment");
+//			return true;
+//
+//		}
+//
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -211,6 +202,13 @@ public class MainActivity extends FragmentActivity {
 			return null;
 		}
 
+	}
+	
+	public void addFood(View view){
+		addFoodFragment dialog = new addFoodFragment();
+		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		db.getFoodList();
+		dialog.show(getSupportFragmentManager(), "FoodList");
 	}
 
 }

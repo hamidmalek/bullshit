@@ -9,6 +9,9 @@
          https://developer.android.com/design/patterns/navigation-drawer.html
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
-
-
+    <dimen name="indicator_height">4dp</dimen>
+    <dimen name="status_progress_height">250dp</dimen>
+    <dimen name="status_goal_height">80dp</dimen>
+    <dimen name="status_advice_height">200dp</dimen>
+    
 </resources>

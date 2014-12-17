@@ -244,6 +244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int activity_horizontal_margin=0x7f070000;
         public static final int activity_vertical_margin=0x7f070001;
+        public static final int indicator_height=0x7f070003;
         /** 
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html
@@ -251,6 +252,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
          */
         public static final int navigation_drawer_width=0x7f070002;
+        public static final int status_advice_height=0x7f070006;
+        public static final int status_goal_height=0x7f070005;
+        public static final int status_progress_height=0x7f070004;
     }
     public static final class drawable {
         public static final int actionbar_bottom=0x7f020000;
@@ -296,43 +300,51 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tabs_pattern_diagonal=0x7f020028;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f05000a;
-        public static final int action_contact=0x7f050022;
-        public static final int btnRegister=0x7f050020;
-        public static final int btnsave=0x7f05001b;
+        public static final int action_more=0x7f05002a;
+        public static final int addFood=0x7f050012;
+        public static final int advice_text=0x7f050015;
+        public static final int advice_title=0x7f050014;
+        public static final int btnRegister=0x7f050028;
+        public static final int btnsave=0x7f050023;
         public static final int dont_show_button=0x7f050008;
         public static final int drawer_layout=0x7f050002;
-        public static final int food_list=0x7f05000b;
-        public static final int footer=0x7f050011;
+        public static final int food_list=0x7f05000e;
+        public static final int food_search=0x7f05000b;
+        public static final int footer=0x7f050019;
+        public static final int fragment_food=0x7f05000a;
         public static final int fullscreen_content=0x7f050006;
         public static final int fullscreen_content_controls=0x7f050007;
-        public static final int header=0x7f050010;
-        public static final int height=0x7f050012;
+        public static final int goal_text=0x7f050013;
+        public static final int header=0x7f050018;
+        public static final int height=0x7f05001a;
         public static final int left_drawer=0x7f050005;
-        public static final int link_to_login=0x7f050021;
-        public static final int linlay2=0x7f050017;
-        public static final int login_scroll=0x7f05000f;
-        public static final int npDay=0x7f05001a;
-        public static final int npMonth=0x7f050019;
-        public static final int npYear=0x7f050018;
+        public static final int link_to_login=0x7f050029;
+        public static final int linlay2=0x7f05001f;
+        public static final int login_scroll=0x7f050017;
+        public static final int npDay=0x7f050022;
+        public static final int npMonth=0x7f050021;
+        public static final int npYear=0x7f050020;
         public static final int np__decrement=0x7f050001;
         /**  Just adding these so I wont have to remove a lot of code from NumberPicker.java. 
          */
         public static final int np__increment=0x7f050000;
-        public static final int np__numberpicker_input=0x7f05001c;
+        public static final int np__numberpicker_input=0x7f050024;
         public static final int pager=0x7f050004;
-        public static final int progressBar=0x7f05000d;
-        public static final int radioFemale=0x7f050016;
-        public static final int radioMale=0x7f050015;
-        public static final int radioSex=0x7f050014;
-        public static final int reg_email=0x7f05001e;
-        public static final int reg_fullname=0x7f05001d;
-        public static final int reg_password=0x7f05001f;
+        public static final int progressBar=0x7f050011;
+        public static final int radioFemale=0x7f05001e;
+        public static final int radioMale=0x7f05001d;
+        public static final int radioSex=0x7f05001c;
+        public static final int reg_email=0x7f050026;
+        public static final int reg_fullname=0x7f050025;
+        public static final int reg_password=0x7f050027;
+        public static final int relativeLayout1=0x7f05000f;
+        public static final int search_bar_food=0x7f05000c;
+        public static final int search_result_food=0x7f05000d;
         public static final int skip_button=0x7f050009;
         public static final int tabs=0x7f050003;
-        public static final int textView1=0x7f05000e;
-        public static final int today_calorie=0x7f05000c;
-        public static final int weight=0x7f050013;
+        public static final int textView1=0x7f050016;
+        public static final int today_calorie=0x7f050010;
+        public static final int weight=0x7f05001b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -349,7 +361,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int main=0x7f03000b;
         public static final int number_picker_with_selector_wheel=0x7f03000c;
         public static final int register=0x7f03000d;
-        public static final int tab_styles=0x7f03000e;
+        public static final int search_results=0x7f03000e;
+        public static final int tab_styles=0x7f03000f;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -377,6 +390,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_section1=0x7f08000d;
         public static final int title_section2=0x7f08000e;
         public static final int title_section3=0x7f08000f;
+        public static final int today_advice=0x7f080017;
         public static final int weight=0x7f080004;
     }
     public static final class style {

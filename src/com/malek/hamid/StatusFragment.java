@@ -31,9 +31,6 @@ public class StatusFragment extends Fragment {
 		progressBar.setMax(100);
 		progress = 70;
 		name = getResources().getString(R.string.fragment_status);
-//		countDown(todayCalorie, 100, 200);
-//		todayCalorie.setText("200");
-		// progress bar
 		ObjectAnimator progressAnimation = ObjectAnimator.ofInt(progressBar,
 				"progress", 0, progress);
 		progressAnimation.setDuration(waitMillis);
@@ -56,35 +53,6 @@ public class StatusFragment extends Fragment {
 	public void addProgress(int progress) {
 
 	}
+	
 
-	private void countDown(final TextView tv, final int base, final int target) {
-		if (base == target) {
-			tv.setText("" + target);
-			return;
-		}
-		for (int i = 0; i < target; i++) {
-			tv.setText("" + base);
-			AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
-			animation.setDuration(waitMillis / 10);
-			animation.setInterpolator(new DecelerateInterpolator());
-			animation.setAnimationListener(new AnimationListener() {
-				public void onAnimationEnd(Animation anim) {
-					countDown(tv, base + 1, target);
-				}
-
-				public void onAnimationStart(Animation animation) {
-					tv.setText("" + base);
-					// TODO Auto-generated method stub
-
-				}
-
-				public void onAnimationRepeat(Animation animation) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-			tv.startAnimation(animation);
-		}
-		tv.setText(""+target);
-	}
 }

@@ -19,9 +19,11 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	// tables name
 	private static final String TABLE_FOOD = "foods";
 	private static final String TABLE_USERINFO = "userInfo";
+	private static final String TABLE_NUTRITION_LOG = "UserNutritionLog";
 
 	// foods table columns names
-	private static final String KEY_FOODNAME = "FoodName";
+	private static final String KEY_FOOD_NAME = "FoodName";
+	private static final String KEY_FOOD_ID_FOOD_TABLE = "FoodId";
 	private static final String KEY_UNIT = "Unit";
 	private static final String KEY_ENERGY = "Energy";
 	private static final String KEY_SIUNIT = "SiUnit";
@@ -35,10 +37,10 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	private static final String KEY_BIRTHDATE = "BirthDate";
 	private static final String KEY_FULFILLED = "Fulfilled";
 
-	// food category enumeration
-	private enum Category {
-		nuts, polo, candy, stew, misc, vegetables, fruit, juice;
-	}
+	// user nutrition log table columns names
+	private static final String KEY_FOOD_ID_LOG_TABLE = "foodId";
+	private static final String KEY_DATE_ADDED = "DateAdded";
+	private static final String KEY_SIZE = "size";
 
 	// constructor
 	public DatabaseHandler(Context context) {
@@ -56,7 +58,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 
 		if (cursor.moveToFirst()) {
 			do {
-				ret.add(cursor.getString(cursor.getColumnIndex(KEY_FOODNAME)));
+				ret.add(cursor.getString(cursor.getColumnIndex(KEY_FOOD_NAME)));
 			} while (cursor.moveToNext());
 		}
 		cursor.close();
@@ -108,7 +110,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	 * @return
 	 */
 	public boolean getUserFulfilled() {
-		String query = "SELECT Fulfilled FROM userInfo";
+		String query = "SELECT " + KEY_FULFILLED + " FROM " + TABLE_USERINFO;
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor c = db.rawQuery(query, null);
 		if (c.getCount() != 0) {
@@ -127,5 +129,63 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			db.close();
 			return false;
 		}
+	}
+
+	/**
+	 * this function returns the list of foods in an array list
+	 * 
+	 * @return
+	 */
+	public ArrayList<Food> getFoodList() {
+		ArrayList<Food> foods = new ArrayList<Food>();
+		String query = "SELECT * FROM " + TABLE_FOOD;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor c = db.rawQuery(query, null);
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			do {
+				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
+//				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				String unit = c.getString(c.getColumnIndex(KEY_UNIT));
+				int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
+				int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
+				System.out.println(name + unit + energy + siEnergy + siUnit);
+			} while (c.moveToNext());
+		}
+		c.close();
+		db.close();
+		return foods;
+	}
+
+	/**
+	 * insert food to database of user food log
+	 * 
+	 * @param food
+	 *            : food is used for its id
+	 * @param size
+	 *            : size is used to calculate calorie
+	 * @param dateAdded
+	 *            : the time when food added to database
+	 */
+	public void insertFoodinUserLog(Food food, int size, String dateAdded) {
+		String query = "INSERT INTO " + TABLE_NUTRITION_LOG + "(" + KEY_SIZE
+				+ "," + KEY_DATE_ADDED + "," + KEY_FOOD_ID_LOG_TABLE + ") values (" + "'"
+				+ size + "'," + "'" + dateAdded + "'," + "'" + food.getId()
+				+ "');";
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL(query);
+		db.close();
+	}
+	/**
+	 * 
+	 * @param query
+	 * @return 
+	 */
+	public ArrayList<String> getFoodList(String query) {
+		ArrayList<String> temp  = new ArrayList<String>();
+		temp.add("سلام");
+		temp.add("salam");
+		return temp;
 	}
 }

@@ -38,14 +38,14 @@ public class FoodsFragment extends Fragment {
 		
 		foodSearchView = (SearchView) rootView.findViewById(R.id.search_bar_food);
 		searcResult = (ListView) rootView.findViewById(R.id.search_result_food);
-		fsa = new FoodSearchAdapter(getActivity(), R.layout.search_results);
+		fsa = new FoodSearchAdapter(getActivity(), new ArrayList<Food>());
 		searcResult.setAdapter(fsa);
 		foodSearchView.setOnQueryTextListener(new OnQueryTextListener() {
 
 			public boolean onQueryTextSubmit(String query) {
 				DatabaseHandler db = new DatabaseHandler(getActivity());
 				if (query.length() > 1) {
-					fsa.setDataList(db.getFoodList(query));
+					fsa.setDataList(db.getFoodObjectList(query));
 				}
 				return true;
 			}
@@ -53,9 +53,9 @@ public class FoodsFragment extends Fragment {
 			public boolean onQueryTextChange(String newText) {
 				DatabaseHandler db = new DatabaseHandler(getActivity());
 				if (newText.length() > 1) {
-					fsa.setDataList(db.getFoodList(newText));
+					fsa.setDataList(db.getFoodObjectList(newText));
 				}else{
-					fsa.setDataList(new ArrayList<String>());
+					fsa.setDataList(new ArrayList<Food>());
 				}
 				return true;
 			}

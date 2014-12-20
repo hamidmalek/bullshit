@@ -30,6 +30,8 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	private static final String KEY_SIENERGY = "SiEnergy";
 	private static final String KEY_CATEGORY = "Category";
 
+	private static final int FOOD_RESULT_LIMIT = 10;
+
 	// userInfo table columns names
 	private static final String KEY_SEX = "Sex";
 	private static final String KEY_WEIGHT = "Weight";
@@ -145,7 +147,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			c.moveToFirst();
 			do {
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
-//				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				// int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
 				String unit = c.getString(c.getColumnIndex(KEY_UNIT));
 				int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
 				String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
@@ -170,22 +172,70 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	 */
 	public void insertFoodinUserLog(Food food, int size, String dateAdded) {
 		String query = "INSERT INTO " + TABLE_NUTRITION_LOG + "(" + KEY_SIZE
-				+ "," + KEY_DATE_ADDED + "," + KEY_FOOD_ID_LOG_TABLE + ") values (" + "'"
-				+ size + "'," + "'" + dateAdded + "'," + "'" + food.getId()
-				+ "');";
+				+ "," + KEY_DATE_ADDED + "," + KEY_FOOD_ID_LOG_TABLE
+				+ ") values (" + "'" + size + "'," + "'" + dateAdded + "',"
+				+ "'" + food.getId() + "');";
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(query);
 		db.close();
 	}
+
 	/**
 	 * 
 	 * @param query
-	 * @return 
+	 * @return
 	 */
 	public ArrayList<String> getFoodList(String query) {
-		ArrayList<String> temp  = new ArrayList<String>();
-		temp.add("سلام");
-		temp.add("salam");
+		ArrayList<String> temp = new ArrayList<String>();
+		String str = "SELECT * FROM " + TABLE_FOOD + " WHERE " + KEY_FOOD_NAME
+				+ " LIKE '%" + query + "%' LIMIT " + FOOD_RESULT_LIMIT;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor c = db.rawQuery(str, null);
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			do {
+				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
+				// int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				// String unit = c.getString(c.getColumnIndex(KEY_UNIT));
+				// int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
+				// int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
+				// System.out.println(name + unit + energy + siEnergy + siUnit);
+				temp.add(name);
+			} while (c.moveToNext());
+		}
+		c.close();
+		db.close();
+		return temp;
+	}
+	
+	/**
+	 * 
+	 * @param query
+	 * @return
+	 */
+	public ArrayList<Food> getFoodObjectList(String query) {
+		query = query.trim();
+		ArrayList<Food> temp = new ArrayList<Food>();
+		String str = "SELECT * FROM " + TABLE_FOOD + " WHERE " + KEY_FOOD_NAME
+				+ " LIKE '%" + query + "%' LIMIT " + FOOD_RESULT_LIMIT;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor c = db.rawQuery(str, null);
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			do {
+				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
+				// int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				// String unit = c.getString(c.getColumnIndex(KEY_UNIT));
+				// int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
+				// int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
+				// System.out.println(name + unit + energy + siEnergy + siUnit);
+				temp.add(new Food(0, name, 100, Food.Category.candy));
+			} while (c.moveToNext());
+		}
+		c.close();
+		db.close();
 		return temp;
 	}
 }

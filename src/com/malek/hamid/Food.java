@@ -116,6 +116,9 @@ public class Food {
 	 */
 	public enum Category {
 		nuts, polo, candy, stew, misc, vegetables, fruit, juice;
+		public String getName(){
+			return this.toString();
+		}
 	}
 
 	/**

@@ -300,15 +300,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tabs_pattern_diagonal=0x7f020028;
     }
     public static final class id {
-        public static final int action_more=0x7f05002a;
+        public static final int action_more=0x7f05002d;
         public static final int addFood=0x7f050012;
+        public static final int add_food_in_search=0x7f05002c;
         public static final int advice_text=0x7f050015;
         public static final int advice_title=0x7f050014;
         public static final int btnRegister=0x7f050028;
         public static final int btnsave=0x7f050023;
+        public static final int category=0x7f05002b;
         public static final int dont_show_button=0x7f050008;
         public static final int drawer_layout=0x7f050002;
-        public static final int food_list=0x7f05000e;
+        public static final int food_list=0x7f05000d;
+        public static final int food_name=0x7f05002a;
         public static final int food_search=0x7f05000b;
         public static final int footer=0x7f050019;
         public static final int fragment_food=0x7f05000a;
@@ -339,7 +342,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int reg_password=0x7f050027;
         public static final int relativeLayout1=0x7f05000f;
         public static final int search_bar_food=0x7f05000c;
-        public static final int search_result_food=0x7f05000d;
+        public static final int search_result_food=0x7f05000e;
         public static final int skip_button=0x7f050009;
         public static final int tabs=0x7f050003;
         public static final int textView1=0x7f050016;

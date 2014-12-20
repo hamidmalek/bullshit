@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:textColor="@android:color/holo_green_dark"
-    android:orientation="vertical" >
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="35dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="5dip" >
 
-</TextView>
+    <!-- Name of the Food -->
+
+    <TextView
+        android:id="@+id/food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="#040404"
+        android:textSize="15dip"
+        android:textStyle="bold" />
+
+    <!-- Category of the food -->
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/food_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dip"
+        android:textColor="#343434"
+        android:textSize="10dip" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/add_food_in_search"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dip"
+        android:background="@android:color/holo_blue_dark" />
+
+</RelativeLayout>

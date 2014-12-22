@@ -135,13 +135,6 @@ public class MainActivity extends FragmentActivity {
 
 	}
 
-	public void onColorClicked(View v) {
-
-		int color = Color.parseColor(v.getTag().toString());
-		changeColor(color);
-
-	}
-
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);

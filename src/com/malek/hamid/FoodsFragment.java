@@ -1,6 +1,7 @@
 package com.malek.hamid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,13 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.malek.hamid.handlers.FoodListAdapter;
@@ -24,26 +29,87 @@ public class FoodsFragment extends Fragment {
 	private ExpandableListView foodList;
 	private FoodSearchAdapter fsa;
 	private final SparseArray<Group> foodGroup = new SparseArray<Group>();
+	public static HashMap<Integer, String> foodCategories = new HashMap<Integer, String>();
+	DatabaseHandler db;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		// defining data base handler for all works :D
+		db = new DatabaseHandler(getActivity());
+		/*
+		 * It is a map of food categories and their IDs. It is used across the
+		 * application for showing the category of the food to the user
+		 */
+		foodCategories = db.getFoodCategories();
+		/*
+		 * getting root view
+		 */
 		View rootView = inflater.inflate(R.layout.fragment_foods, container,
 				false);
+		// -------------- Foods List Section -------------------------------
+		/*
+		 * list of foods that is shown to user in an expandable list view
+		 */
 		foodList = (ExpandableListView) rootView.findViewById(R.id.food_list);
+		/*
+		 * creating data for list of foods
+		 */
 		createData();
-		FoodListAdapter adapter = new FoodListAdapter(getActivity(), foodGroup);
+		/*
+		 * defining and setting the adapter of the food list
+		 */
+		final FoodListAdapter adapter = new FoodListAdapter(getActivity(), foodGroup);
 		foodList.setAdapter(adapter);
+		foodList.setOnItemClickListener(new OnItemClickListener() {
+			
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+//				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
+				adapter.setFoodsToCategory(position);
+			}
+		});
+		foodList.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
+				return true;
+			}
+		});
+		foodList.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
+			}
+		});
 		
-		foodSearchView = (SearchView) rootView.findViewById(R.id.search_bar_food);
+		// ------------- Foods Search Section ------------------------------
+		/*
+		 * search input 
+		 */
+		foodSearchView = (SearchView) rootView
+				.findViewById(R.id.search_bar_food);
+		/*
+		 * list view of the search results
+		 */
 		searcResult = (ListView) rootView.findViewById(R.id.search_result_food);
+		/*
+		 * defining and setting the adapter of the foods search
+		 */
 		fsa = new FoodSearchAdapter(getActivity(), new ArrayList<Food>());
 		searcResult.setAdapter(fsa);
+		/*
+		 * on click listener of the food search bar
+		 */
 		foodSearchView.setOnQueryTextListener(new OnQueryTextListener() {
 
 			public boolean onQueryTextSubmit(String query) {
-				DatabaseHandler db = new DatabaseHandler(getActivity());
+				db = new DatabaseHandler(getActivity());
 				if (query.length() > 1) {
 					fsa.setDataList(db.getFoodObjectList(query));
 				}
@@ -54,22 +120,25 @@ public class FoodsFragment extends Fragment {
 				DatabaseHandler db = new DatabaseHandler(getActivity());
 				if (newText.length() > 1) {
 					fsa.setDataList(db.getFoodObjectList(newText));
-				}else{
+				} else {
 					fsa.setDataList(new ArrayList<Food>());
 				}
 				return true;
 			}
 		});
+		
 		return rootView;
 	}
 
 	public void createData() {
-		for (int j = 0; j < 5; j++) {
-			Group group = new Group("دسته " + j);
-			for (int i = 0; i < 5; i++) {
-				group.children.add("زیردسته" + i);
-			}
-			foodGroup.append(j, group);
+		for(int i=0 ; i < foodCategories.size() ; i++){
+			foodGroup.append(i , new Group(foodCategories.get(i),i));
 		}
+//		
+//		String[] categories = foodCategories.values().toArray(
+//				new String[foodCategories.values().size()]);
+//		for (int i = 0; i < categories.length; i++) {
+//			foodGroup.append(i, new Group(categories[i], i));
+//		}
 	}
 }

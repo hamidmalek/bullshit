@@ -43,10 +43,7 @@ public class addFoodFragment extends DialogFragment {
 
 	public void createData() {
 		for (int j = 0; j < 5; j++) {
-			Group group = new Group("دسته " + j);
-			for (int i = 0; i < 5; i++) {
-				group.children.add("زیردسته" + i);
-			}
+			Group group = new Group("دسته " + j,j);
 			foodGroup.append(j, group);
 		}
 	}

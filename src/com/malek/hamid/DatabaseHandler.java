@@ -1,6 +1,7 @@
 package com.malek.hamid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +20,8 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	// tables name
 	private static final String TABLE_FOOD = "foods";
 	private static final String TABLE_USERINFO = "userInfo";
-	private static final String TABLE_NUTRITION_LOG = "UserNutritionLog";
+	private static final String TABLE_NUTRITION_LOG = "userNutritionLog";
+	private static final String TABLE_FOOD_CATEGORIES = "foodCategories";
 
 	// foods table columns names
 	private static final String KEY_FOOD_NAME = "FoodName";
@@ -29,7 +31,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	private static final String KEY_SIUNIT = "SiUnit";
 	private static final String KEY_SIENERGY = "SiEnergy";
 	private static final String KEY_CATEGORY = "Category";
-
+	private static final String KEY_CATEGORY_ID = "CategoryId";
 	private static final int FOOD_RESULT_LIMIT = 10;
 
 	// userInfo table columns names
@@ -208,7 +210,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 		db.close();
 		return temp;
 	}
-	
+
 	/**
 	 * 
 	 * @param query
@@ -225,17 +227,58 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			c.moveToFirst();
 			do {
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
-				// int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				 int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
 				// String unit = c.getString(c.getColumnIndex(KEY_UNIT));
-				// int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				 int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
 				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
 				// int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
-				// System.out.println(name + unit + energy + siEnergy + siUnit);
-				temp.add(new Food(0, name, 100, Food.Category.candy));
+				 int categoryId = c.getInt(c.getColumnIndex(KEY_CATEGORY_ID));
+				// System.out.println(new Food(id,name,energy,categoryId));
+				 temp.add(new Food(id, name,energy,categoryId ));
 			} while (c.moveToNext());
 		}
 		c.close();
 		db.close();
 		return temp;
+	}
+
+	/**
+	 * this function returns the categories of the foods
+	 * 
+	 * @return String of food Categories
+	 */
+	public HashMap<Integer, String> getFoodCategories() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		HashMap<Integer, String> foodCategories = new HashMap<Integer, String>();
+		String query = "SELECT * FROM "
+				+ TABLE_FOOD_CATEGORIES;
+		Cursor c = db.rawQuery(query, null);
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			do {
+				String name = c.getString(c.getColumnIndex(KEY_CATEGORY));
+				int id = c.getInt(c.getColumnIndex(KEY_CATEGORY_ID));
+				foodCategories.put(id, name);
+			} while (c.moveToNext());
+		}
+		return foodCategories;
+	}
+
+	public ArrayList<Food> getFoods(int categoryId) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ArrayList<Food> foods = new ArrayList<Food>();
+		String query = "SELECT * FROM " + TABLE_FOOD + " WHERE "
+				+ KEY_CATEGORY_ID + "=" + categoryId;
+		Cursor c = db.rawQuery(query, null);
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			do {
+				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
+				int calorie = c.getInt(c.getColumnIndex(KEY_SIENERGY));
+				foods.add(new Food(id, name, calorie, categoryId));
+			} while (c.moveToNext());
+		}
+		return foods;
 	}
 }

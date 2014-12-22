@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.malek.hamid.Food;
+import com.malek.hamid.FoodsFragment;
 import com.malek.hamid.R;
 
 public class FoodSearchAdapter extends BaseAdapter {
@@ -55,7 +56,7 @@ public class FoodSearchAdapter extends BaseAdapter {
 		Food food = data.get(position);
 
 		foodName.setText(food.getName());
-		foodCategory.setText(food.getCategory().getName());
+		foodCategory.setText(FoodsFragment.foodCategories.get(food.getCategoryId()));
 		addFood.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {

@@ -5,7 +5,7 @@ public class Food {
 	private String name;
 	private int calorieSI;
 	private int calorieUnit;
-	private Category category;
+	private int categoryId;
 	private Unit unit;
 
 	/**
@@ -24,12 +24,12 @@ public class Food {
 	 * @param category
 	 */
 	public Food(int id ,String name, int calorieSI, int calorieUnit, Unit unit,
-			Category category) {
+			int categoryId) {
 		this.id = id ;
 		this.name = name;
 		this.calorieSI = calorieSI;
 		this.calorieUnit = calorieUnit;
-		this.category = category;
+		this.setCategoryId(categoryId);
 		this.unit = unit;
 	}
 
@@ -43,11 +43,11 @@ public class Food {
 	 *            : category of food which is from an enumeration provided in
 	 *            this class
 	 */
-	public Food(int id ,String name, int calorieSI, Category category) {
+	public Food(int id ,String name, int calorieSI, int categoryId) {
 		this.id = id;
 		this.name = name;
 		this.calorieSI = calorieSI;
-		this.category = category;
+		this.categoryId = categoryId;
 		this.unit = Unit.none;
 		this.calorieUnit = -1;
 	}
@@ -76,13 +76,6 @@ public class Food {
 		this.calorieUnit = calorieUnit;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 
 	public String getName() {
 		return name;
@@ -108,18 +101,14 @@ public class Food {
 		this.id = id;
 	}
 
-	/**
-	 * enumeration of the category of the foods
-	 * 
-	 * @author hamid_
-	 * 
-	 */
-	public enum Category {
-		nuts, polo, candy, stew, misc, vegetables, fruit, juice;
-		public String getName(){
-			return this.toString();
-		}
+	public int getCategoryId() {
+		return categoryId;
 	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
 
 	/**
 	 * enumeration of the non SI units for foods
@@ -129,5 +118,9 @@ public class Food {
 	 */
 	public enum Unit {
 		none, spoon, glass;
+	}
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

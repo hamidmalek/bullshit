@@ -59,7 +59,7 @@ public class FoodListAdapter extends BaseExpandableListAdapter {
 	public Object getGroup(int groupPosition) {
 		DatabaseHandler db = new DatabaseHandler(activity);
 		groups.get(groupPosition).children.clear();
-		groups.get(groupPosition).children.addAll(db.getFoods(groupPosition));
+		groups.get(groupPosition).children.addAll(db.getFoods(groupPosition+1));
 		return groups.get(groupPosition);
 	}
 
@@ -100,9 +100,10 @@ public class FoodListAdapter extends BaseExpandableListAdapter {
 		return false;
 	}
 
-	public void setFoodsToCategory(int categoryId) {
-		DatabaseHandler db = new DatabaseHandler(activity);
-		groups.get(categoryId).children.addAll(db.getFoods(categoryId));
-		notifyDataSetChanged();
-	}
+//	public void setFoodsToCategory(int categoryId) {
+//		DatabaseHandler db = new DatabaseHandler(activity);
+//		groups.get(categoryId).children.addAll(db.getFoods(categoryId));
+//		System.out.println("+++++++++++++++++++++++++++++++++");
+//		notifyDataSetChanged();
+//	}
 }

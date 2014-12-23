@@ -1,24 +1,13 @@
 package com.malek.hamid;
 
-import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
 import com.malek.hamid.handlers.FoodListAdapter;
 import com.malek.hamid.handlers.Group;
 
@@ -31,13 +20,13 @@ public class addFoodFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.fragment_foods, container,
+		View rootView = inflater.inflate(R.layout.fragment_add_foods, container,
 				false);
-		foodList = (ExpandableListView) rootView.findViewById(R.id.food_list);
-		// foodList.setDivider(R.drawable.border);
-		createData();
-		FoodListAdapter adapter = new FoodListAdapter(getActivity(), foodGroup);
-		foodList.setAdapter(adapter);
+//		foodList = (ExpandableListView) rootView.findViewById(R.id.food_list);
+//		// foodList.setDivider(R.drawable.border);
+//		createData();
+//		FoodListAdapter adapter = new FoodListAdapter(getActivity(), foodGroup);
+//		foodList.setAdapter(adapter);
 		return rootView;
 	}
 

@@ -191,6 +191,8 @@ public class MainActivity extends FragmentActivity {
 				return new FoodsFragment();
 			case 2:
 				return new LogFragment();
+			case 3: 
+				return new WorkoutFragment();
 			}
 			return null;
 		}

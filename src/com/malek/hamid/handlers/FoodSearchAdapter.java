@@ -2,8 +2,9 @@ package com.malek.hamid.handlers;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,19 +12,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.malek.hamid.Food;
 import com.malek.hamid.FoodsFragment;
 import com.malek.hamid.R;
+import com.malek.hamid.addFoodFragment;
 
 public class FoodSearchAdapter extends BaseAdapter {
 
-	private Activity activity;
+	private FragmentActivity activity;
 	private static LayoutInflater inflater = null;
 	private ArrayList<Food> data;
 
-	public FoodSearchAdapter(Activity a, ArrayList<Food> d) {
+	public FoodSearchAdapter(FragmentActivity a, ArrayList<Food> d) {
 		activity = a;
 		data = d;
 		inflater = (LayoutInflater) activity
@@ -60,7 +61,9 @@ public class FoodSearchAdapter extends BaseAdapter {
 		addFood.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Toast.makeText(activity, "SALAM!!", Toast.LENGTH_SHORT).show();
+				addFoodFragment dialog = new addFoodFragment();
+				dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogeStyle);
+				dialog.show(activity.getSupportFragmentManager(), "Hello");
 			}
 		});
 		return vi;

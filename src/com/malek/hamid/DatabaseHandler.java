@@ -227,14 +227,14 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			c.moveToFirst();
 			do {
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
-				 int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
+				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
 				// String unit = c.getString(c.getColumnIndex(KEY_UNIT));
-				 int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
 				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
 				// int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
-				 int categoryId = c.getInt(c.getColumnIndex(KEY_CATEGORY_ID));
+				int categoryId = c.getInt(c.getColumnIndex(KEY_CATEGORY_ID));
 				// System.out.println(new Food(id,name,energy,categoryId));
-				 temp.add(new Food(id, name,energy,categoryId ));
+				temp.add(new Food(id, name, energy, categoryId));
 			} while (c.moveToNext());
 		}
 		c.close();
@@ -250,8 +250,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	public HashMap<Integer, String> getFoodCategories() {
 		SQLiteDatabase db = this.getWritableDatabase();
 		HashMap<Integer, String> foodCategories = new HashMap<Integer, String>();
-		String query = "SELECT * FROM "
-				+ TABLE_FOOD_CATEGORIES;
+		String query = "SELECT * FROM " + TABLE_FOOD_CATEGORIES;
 		Cursor c = db.rawQuery(query, null);
 		if (c.getCount() != 0) {
 			c.moveToFirst();
@@ -261,9 +260,18 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 				foodCategories.put(id, name);
 			} while (c.moveToNext());
 		}
+		for(int i = 0 ; i <= foodCategories.size() ; i++){
+			System.out.println(i+":"+foodCategories.get(i));
+		}
 		return foodCategories;
 	}
 
+	/**
+	 * this function returns the foods in a specific category
+	 * 
+	 * @param categoryId
+	 * @return Array List of foods
+	 */
 	public ArrayList<Food> getFoods(int categoryId) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ArrayList<Food> foods = new ArrayList<Food>();

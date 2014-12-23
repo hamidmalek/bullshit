@@ -9,13 +9,9 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
 import com.malek.hamid.handlers.FoodListAdapter;
@@ -59,38 +55,20 @@ public class FoodsFragment extends Fragment {
 		/*
 		 * defining and setting the adapter of the food list
 		 */
-		final FoodListAdapter adapter = new FoodListAdapter(getActivity(), foodGroup);
+		final FoodListAdapter adapter = new FoodListAdapter(getActivity(),
+				foodGroup);
 		foodList.setAdapter(adapter);
-		foodList.setOnItemClickListener(new OnItemClickListener() {
-			
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-//				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
-				adapter.setFoodsToCategory(position);
-			}
-		});
-		foodList.setOnItemLongClickListener(new OnItemLongClickListener() {
+		// foodList.setOnItemClickListener(new OnItemClickListener() {
+		//
+		// public void onItemClick(AdapterView<?> parent, View view,
+		// int position, long id) {
+		// // adapter.setFoodsToCategory(position+1);
+		// }
+		// });
 
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
-				return true;
-			}
-		});
-		foodList.setOnItemClickListener(new OnItemClickListener() {
-
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "DSDSDSDS", 10000).show();
-			}
-		});
-		
 		// ------------- Foods Search Section ------------------------------
 		/*
-		 * search input 
+		 * search input
 		 */
 		foodSearchView = (SearchView) rootView
 				.findViewById(R.id.search_bar_food);
@@ -126,19 +104,13 @@ public class FoodsFragment extends Fragment {
 				return true;
 			}
 		});
-		
+
 		return rootView;
 	}
 
 	public void createData() {
-		for(int i=0 ; i < foodCategories.size() ; i++){
-			foodGroup.append(i , new Group(foodCategories.get(i),i));
+		for (int i = 0; i < foodCategories.size(); i++) {
+			foodGroup.append(i, new Group(foodCategories.get(i+1), i+1));
 		}
-//		
-//		String[] categories = foodCategories.values().toArray(
-//				new String[foodCategories.values().size()]);
-//		for (int i = 0; i < categories.length; i++) {
-//			foodGroup.append(i, new Group(categories[i], i));
-//		}
 	}
 }

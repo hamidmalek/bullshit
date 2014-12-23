@@ -20,17 +20,16 @@
             app:pstsIndicatorColor="@color/tab_indicatora"
             app:pstsIndicatorHeight="@dimen/indicator_height"
             app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="false"
-            
             app:pstsUnderlineHeight="0dp" />
 
         <android.support.v4.view.ViewPager
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/pager" 
+            android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tabs"
-            android:background="#ABF" >
+            android:background="#ABF">
+
         </android.support.v4.view.ViewPager>
 
     </RelativeLayout>

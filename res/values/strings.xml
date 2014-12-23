@@ -24,6 +24,7 @@
     <string name="fragment_status">امروز</string>
     <string name="fragment_log">تقویم</string>
     <string name="fragment_foods">لیست غذاها</string>
+    <string name="fragment_workout">تمرین</string>
 
     
     <string name="today_advice"><u>توصیه های امروز</u></string>
@@ -36,7 +37,8 @@
     
        <string-array name="main_tabs_array">
         <item>امروز</item>
-        <item>لیست غذاها</item>
+        <item>غذاها</item>
+        <item>تمرین</item>
         <item>تقویم</item>
     </string-array>
 

@@ -9,6 +9,7 @@ import com.malek.hamid.FoodsFragment;
 import com.malek.hamid.LogFragment;
 import com.malek.hamid.R;
 import com.malek.hamid.StatusFragment;
+import com.malek.hamid.WorkoutFragment;
 
 public class TabsPagerAdapter  extends FragmentPagerAdapter{
 
@@ -22,6 +23,8 @@ public class TabsPagerAdapter  extends FragmentPagerAdapter{
 	public Fragment getItem(int index) {
 
 		switch (index) {
+		case 3:
+			return new WorkoutFragment();
 		case 2:
 			return new LogFragment();
 		case 0:
@@ -34,14 +37,17 @@ public class TabsPagerAdapter  extends FragmentPagerAdapter{
 	}
 	public String getName(int index, Activity activity){
 		switch (index) {
+		case 3:
+			// Workout fragment activity
+			return activity.getResources().getString(R.string.fragment_workout);
 		case 2:
-			// Top Rated fragment activity
+			// Nutrition Log fragment activity
 			return activity.getResources().getString(R.string.fragment_log);
 		case 0:
-			// Games fragment activity
+			// Today Status fragment activity
 			return activity.getResources().getString(R.string.fragment_status);
 		case 1:
-			// Movies fragment activity
+			// Foods fragment activity
 			return activity.getResources().getString(R.string.fragment_foods);
 		}
 
@@ -49,7 +55,7 @@ public class TabsPagerAdapter  extends FragmentPagerAdapter{
 	}
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 3;
+		return 4;
 	}
 
 }

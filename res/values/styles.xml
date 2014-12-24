@@ -53,9 +53,8 @@
     </style>
 
     <style name="DialogeStyle" parent="@android:style/Theme.Dialog">
-        <item name="android:background">@color/action_bar_background</item>
+        <item name="android:background">@android:color/white</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#000</item>
     </style>
 
 </resources>

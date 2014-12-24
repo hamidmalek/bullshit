@@ -55,14 +55,19 @@ public class FoodSearchAdapter extends BaseAdapter {
 		ImageButton addFood = (ImageButton) vi
 				.findViewById(R.id.add_food_in_search); // add food button
 		Food food = data.get(position);
+		addFood.setTag(food);
 
 		foodName.setText(food.getName());
-		foodCategory.setText(FoodsFragment.foodCategories.get(food.getCategoryId()));
+		foodCategory.setText(FoodsFragment.foodCategories.get(food
+				.getCategoryId()));
 		addFood.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				addFoodFragment dialog = new addFoodFragment();
-				dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogeStyle);
+				dialog.setStyle(DialogFragment.STYLE_NO_TITLE,
+						R.style.DialogeStyle);
+				System.out.println(v.getTag());
+				dialog.setFood((Food)v.getTag());
 				dialog.show(activity.getSupportFragmentManager(), "Hello");
 			}
 		});

@@ -24,7 +24,10 @@ public class Person implements Parcelable {
 	 * user desired weight
 	 */
 	private int desiredWeight;
-
+	/*
+	 * user activity level
+	 */
+	private int activityLevel;
 	/*
 	 * user deadline for desired weight
 	 */
@@ -172,5 +175,13 @@ public class Person implements Parcelable {
 		temp += ", and " + gender +"is "+ getAge() + " years old. ";
 		temp += gender + " should use "+ getBMR() + " kcal everyday to keep weight.";
 		return temp;
+	}
+
+	public int getActivityLevel() {
+		return activityLevel;
+	}
+
+	public void setActivityLevel(int activityLevel) {
+		this.activityLevel = activityLevel;
 	};
 }

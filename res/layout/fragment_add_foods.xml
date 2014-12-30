@@ -1,10 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_food"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal|top"
-    android:layout_margin="5dip"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="10dp"
@@ -29,21 +28,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dip"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:weightSum="2" >
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/unit_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/unit_edit1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
+                android:layout_margin="7dp"
                 android:layout_weight="1"
                 android:inputType="number" />
         </LinearLayout>
@@ -51,28 +50,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dip"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:weightSum="2" >
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/unit_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
 
             <EditText
-                android:id="@+id/editText2"
-                android:layout_width="100dip"
+                android:id="@+id/unit_edit2"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
+                android:layout_margin="7dp"
                 android:layout_weight="1"
                 android:inputType="number" />
         </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/insert_food_to_log"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:onClick="insertFoodToLog"
         android:textColor="@android:color/white"
         android:text="اضافه کردن" 
         android:background="#111"/>

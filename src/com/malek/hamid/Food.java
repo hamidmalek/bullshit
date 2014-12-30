@@ -3,10 +3,12 @@ package com.malek.hamid;
 public class Food {
 	private int id;
 	private String name;
-	private int calorieSI;
-	private int calorieUnit;
+	private double stdEnergy;
+	private double stdProtein;
+	private double unitEnergy;
+	private double unitProtein;
 	private int categoryId;
-	private Unit unit;
+	private int unitId;
 
 	/**
 	 * 
@@ -17,20 +19,20 @@ public class Food {
 	 * @param category
 	 *            : category of food which is from an enumeration provided in
 	 *            this class
-	 * @param unit
+	 * @param unitId
 	 *            : non SI unit of the food such as glass, spoon, ... .
 	 *            enumeration is provided in this class
 	 * 
 	 * @param category
 	 */
-	public Food(int id ,String name, int calorieSI, int calorieUnit, Unit unit,
+	public Food(int id ,String name, double calorieSI, int calorieUnit, int unitId,
 			int categoryId) {
 		this.id = id ;
 		this.name = name;
-		this.calorieSI = calorieSI;
-		this.calorieUnit = calorieUnit;
+		this.stdEnergy = calorieSI;
+		this.unitEnergy = calorieUnit;
 		this.setCategoryId(categoryId);
-		this.unit = unit;
+		this.unitId = unitId;
 	}
 
 	/**
@@ -46,34 +48,34 @@ public class Food {
 	public Food(int id ,String name, int calorieSI, int categoryId) {
 		this.id = id;
 		this.name = name;
-		this.calorieSI = calorieSI;
+		this.stdEnergy = calorieSI;
 		this.categoryId = categoryId;
-		this.unit = Unit.none;
-		this.calorieUnit = -1;
+		this.unitId = 0;
+		this.unitEnergy = -1;
 	}
 
-	public Unit getUnit() {
-		return unit;
+	public int getUnit() {
+		return unitId;
 	}
 
-	public void setUnit(Unit unit) {
-		this.unit = unit;
+	public void setUnit(int unit) {
+		this.unitId = unit;
 	}
 
-	public int getCalorieSI() {
-		return calorieSI;
+	public double getCalorieSI() {
+		return stdEnergy;
 	}
 
 	public void setCalorieSI(int calorieSI) {
-		this.calorieSI = calorieSI;
+		this.stdEnergy = calorieSI;
 	}
 
-	public int getCalorieUnit() {
-		return calorieUnit;
+	public double getCalorieUnit() {
+		return unitEnergy;
 	}
 
 	public void setCalorieUnit(int calorieUnit) {
-		this.calorieUnit = calorieUnit;
+		this.unitEnergy = calorieUnit;
 	}
 
 
@@ -85,12 +87,12 @@ public class Food {
 		this.name = name;
 	}
 
-	public int getCalorie() {
-		return calorieSI;
+	public double getCalorie() {
+		return stdEnergy;
 	}
 
 	public void setCalorie(int calorie) {
-		this.calorieSI = calorie;
+		this.stdEnergy = calorie;
 	}
 
 	public int getId() {
@@ -122,5 +124,21 @@ public class Food {
 	@Override
 	public String toString() {
 		return getName();
+	}
+
+	public double getStdProtein() {
+		return stdProtein;
+	}
+
+	public void setStdProtein(double stdProtein) {
+		this.stdProtein = stdProtein;
+	}
+
+	public double getUnitProtein() {
+		return unitProtein;
+	}
+
+	public void setUnitProtein(double unitProtein) {
+		this.unitProtein = unitProtein;
 	}
 }

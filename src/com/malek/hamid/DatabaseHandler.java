@@ -22,29 +22,41 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	private static final String TABLE_USERINFO = "userInfo";
 	private static final String TABLE_NUTRITION_LOG = "userNutritionLog";
 	private static final String TABLE_FOOD_CATEGORIES = "foodCategories";
+	private static final String TABLE_ACTIVITY_LEVEL = "activityLevels";
 
 	// foods table columns names
 	private static final String KEY_FOOD_NAME = "FoodName";
 	private static final String KEY_FOOD_ID_FOOD_TABLE = "FoodId";
-	private static final String KEY_UNIT = "Unit";
-	private static final String KEY_ENERGY = "Energy";
-	private static final String KEY_SIUNIT = "SiUnit";
-	private static final String KEY_SIENERGY = "SiEnergy";
-	private static final String KEY_CATEGORY = "Category";
+	private static final String KEY_STD_ENERGY = "StdEnergy";
+	private static final String KEY_STD_PROTEIN = "StdProtein";
+	private static final String KEY_SEC_UNIT_ID = "SecUnitId";
+	private static final String KEY_UNIT_ENERGY = "UnitEnergy";
+	private static final String KEY_UNIT_PROTEIN = "UnitProtein";
 	private static final String KEY_CATEGORY_ID = "CategoryId";
 	private static final int FOOD_RESULT_LIMIT = 10;
 
+	private static final String KEY_CATEGORY = "Category";
 	// userInfo table columns names
 	private static final String KEY_SEX = "Sex";
 	private static final String KEY_WEIGHT = "Weight";
 	private static final String KEY_HEIGHT = "Height";
 	private static final String KEY_BIRTHDATE = "BirthDate";
 	private static final String KEY_FULFILLED = "Fulfilled";
+	private static final String KEY_USER_ACTIVITY_LEVEL = "ActivityLevelId";
 
 	// user nutrition log table columns names
-	private static final String KEY_FOOD_ID_LOG_TABLE = "foodId";
+	private static final String KEY_LOG_TABLE_FOOD_ID = "FoodId";
 	private static final String KEY_DATE_ADDED = "DateAdded";
 	private static final String KEY_SIZE = "size";
+	private static final String KEY_LOG_ID = "LogId";
+	private static final String KEY_LOG_IS_STD = "LogIsStd";
+	private static final String KEY_LOG_DATE = "LogDate";
+	private static final String KEY_MEAL_ID = "MealId";
+
+	// activity level table columns names
+	private static final String KEY_ACTIVITY_LEVEL_ID = "ActLeId";
+	private static final String KEY_ACTIVITY_LEVEL_DESCRIPTION = "ActLevDesc";
+	private static final String KEY_ACTIVITY_LEVEL_PROPORTION = "ActLevProp";
 
 	// constructor
 	public DatabaseHandler(Context context) {
@@ -85,12 +97,13 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	 * 
 	 */
 	public void setUserInfo(int weight, int height, int sex, String birthDate,
-			int fulfilled) {
+			int activityLevel, int fulfilled) {
 		String query = "INSERT INTO " + TABLE_USERINFO + "(" + KEY_WEIGHT + ","
 				+ KEY_HEIGHT + "," + KEY_SEX + "," + KEY_BIRTHDATE + ","
-				+ KEY_FULFILLED + ") values (" + "'" + weight + "'," + "'"
-				+ height + "'," + "'" + sex + "'," + "'" + birthDate + "',"
-				+ "'" + fulfilled + "');";
+				+ KEY_USER_ACTIVITY_LEVEL + "," + KEY_FULFILLED + ") values ("
+				+ "'" + weight + "'," + "'" + height + "'," + "'" + sex + "',"
+				+ "'" + birthDate + "','" + activityLevel + "'," + "'"
+				+ fulfilled + "');";
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(query);
 		db.close();
@@ -105,7 +118,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 		if (person.getSex())
 			sex = 1;
 		setUserInfo(person.getWeight(), person.getHeight(), sex,
-				person.getBirthday(), 1);
+				person.getBirthday(), person.getActivityLevel(), 1);
 	}
 
 	/**
@@ -150,11 +163,11 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			do {
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
 				// int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
-				String unit = c.getString(c.getColumnIndex(KEY_UNIT));
-				int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
-				String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
-				int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
-				System.out.println(name + unit + energy + siEnergy + siUnit);
+				String unit = c.getString(c.getColumnIndex(KEY_SEC_UNIT_ID));
+				int energy = c.getInt(c.getColumnIndex(KEY_UNIT_ENERGY));
+				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
+				int siEnergy = c.getInt(c.getColumnIndex(KEY_STD_ENERGY));
+				System.out.println(name + unit + energy + siEnergy);
 			} while (c.moveToNext());
 		}
 		c.close();
@@ -165,18 +178,24 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 	/**
 	 * insert food to database of user food log
 	 * 
-	 * @param food
+	 * @param foodId
 	 *            : food is used for its id
 	 * @param size
 	 *            : size is used to calculate calorie
 	 * @param dateAdded
 	 *            : the time when food added to database
 	 */
-	public void insertFoodinUserLog(Food food, int size, String dateAdded) {
+	public void insertFoodinUserLog(int foodId, int size, String dateAdded,
+			String logDate, boolean isStd) {
+		int isStdtemp = 0;
+		if (isStd)
+			isStdtemp = 1;
 		String query = "INSERT INTO " + TABLE_NUTRITION_LOG + "(" + KEY_SIZE
-				+ "," + KEY_DATE_ADDED + "," + KEY_FOOD_ID_LOG_TABLE
+				+ "," + KEY_DATE_ADDED + "," + KEY_LOG_TABLE_FOOD_ID + ","
+				+ KEY_LOG_DATE + "," + KEY_LOG_IS_STD + "," + KEY_MEAL_ID
 				+ ") values (" + "'" + size + "'," + "'" + dateAdded + "',"
-				+ "'" + food.getId() + "');";
+				+ "'" + foodId + "'," + "'" + logDate + "'," + "'" + isStdtemp
+				+ "'," + "'" + 1 + "');";
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(query);
 		db.close();
@@ -229,7 +248,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
 				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
 				// String unit = c.getString(c.getColumnIndex(KEY_UNIT));
-				int energy = c.getInt(c.getColumnIndex(KEY_ENERGY));
+				int energy = c.getInt(c.getColumnIndex(KEY_UNIT_ENERGY));
 				// String siUnit = c.getString(c.getColumnIndex(KEY_SIUNIT));
 				// int siEnergy = c.getInt(c.getColumnIndex(KEY_SIENERGY));
 				int categoryId = c.getInt(c.getColumnIndex(KEY_CATEGORY_ID));
@@ -260,9 +279,6 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 				foodCategories.put(id, name);
 			} while (c.moveToNext());
 		}
-		for(int i = 0 ; i <= foodCategories.size() ; i++){
-			System.out.println(i+":"+foodCategories.get(i));
-		}
 		return foodCategories;
 	}
 
@@ -283,7 +299,7 @@ public class DatabaseHandler extends SQLiteAssetHelper {
 			do {
 				int id = c.getInt(c.getColumnIndex(KEY_FOOD_ID_FOOD_TABLE));
 				String name = c.getString(c.getColumnIndex(KEY_FOOD_NAME));
-				int calorie = c.getInt(c.getColumnIndex(KEY_SIENERGY));
+				int calorie = c.getInt(c.getColumnIndex(KEY_STD_ENERGY));
 				foods.add(new Food(id, name, calorie, categoryId));
 			} while (c.moveToNext());
 		}

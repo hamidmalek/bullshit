@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 	// private String[] mPlanetTitles;
@@ -204,6 +205,10 @@ public class MainActivity extends FragmentActivity {
 		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 		db.getFoodList();
 		dialog.show(getSupportFragmentManager(), "FoodList");
+	}
+	
+	public void insertFoodToLog(View view){
+		Toast.makeText(getApplicationContext(), "Hi there :D", 10000).show();
 	}
 
 }

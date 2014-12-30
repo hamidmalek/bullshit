@@ -15,11 +15,14 @@
         android:theme="@style/AppMainTheme" >
         <activity
             android:name=".LoginActivity"
-            android:label="Login to your Account" 
-            android:theme="@style/NPWidget.Holo.NumberPicker">
-            
-        </activity>
+            android:label="Login to your Account"
+            android:theme="@style/NPWidget.Holo.NumberPicker" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".StatScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -27,13 +30,12 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
+            android:name=".ActLevelActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/activity_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>            
         </activity>
     </application>
 

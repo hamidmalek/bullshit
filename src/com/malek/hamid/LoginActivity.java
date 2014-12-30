@@ -147,17 +147,17 @@ public class LoginActivity extends Activity {
 					return;
 				}
 				String userBD = createBDString(npYear, npMonth, npDay);
-				db.setUserInfo(userWeight, userHeight, userSex, userBD, 1);
+				//TODO
+				db.setUserInfo(userWeight, userHeight, userSex, userBD,1, 1);
 				db.close();
 				// directing user to statistics activity
 				Intent intent = new Intent(getBaseContext(),
-						StatScreenActivity.class);
+						ActLevelActivity.class);
 
 				Person user = new Person(userHeight, userWeight, userBD,
 						userSex == 1 ? true : false);
 				intent.putExtra("user", user);
 				startActivity(intent);
-				finish();
 			}
 
 			/**

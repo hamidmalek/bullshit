@@ -25,7 +25,9 @@
     <string name="fragment_log">تقویم</string>
     <string name="fragment_foods">لیست غذاها</string>
     <string name="fragment_workout">تمرین</string>
-
+	
+    
+    <string name="activity_level">میزان فعالیت روزانه خود را مشخص کنید.</string>
     
     <string name="today_advice"><u>توصیه های امروز</u></string>
     <string-array name="planets_array">
